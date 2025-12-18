@@ -1,0 +1,36 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "docker-php-entrypoint apache2-foreground"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+```
+
+4. **Commit changes**
+
+#### Step 4: Deploy ke Railway
+
+1. **Buka Railway Dashboard**
+2. Masuk ke project MySQL kamu
+3. Klik **"+ New"**
+4. Pilih **"GitHub Repo"**
+5. Pilih repo **phpmyadmin** yang sudah di-fork
+6. Railway akan auto-deploy!
+
+#### Step 5: Set Environment Variables
+
+1. Klik service phpMyAdmin yang baru dibuat
+2. Tab **"Variables"**
+3. Tambahkan:
+```
+PMA_HOST=viaduct.proxy.rlwy.net
+PMA_PORT=12345
+PMA_USER=root
+PMA_PASSWORD=your_mysql_password
+PMA_ARBITRARY=1
+UPLOAD_LIMIT=50M
+MEMORY_LIMIT=512M
